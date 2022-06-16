@@ -4,8 +4,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class BrowserUtils {
@@ -65,6 +68,43 @@ This method accepts a String "expectedTitle" and Asserts if it is true
         //Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         wait.until(ExpectedConditions.invisibilityOf(webElement));
+
+    }
+
+    /**
+    * This method will verify if the current URL contains expected value
+    * @param expectedInUrl
+     */
+    public static void verifyTitleContains(String expectedInUrl){
+
+        Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains(expectedInUrl));
+
+    }
+
+
+    /**
+     * This method will accept a dropdown as a WebElement
+     * and return all ottions' text in a list of String
+     *
+     *
+     * @param dropdownElement
+     * @return
+     */
+    public static List<String> dropdownOptionsAsString(WebElement dropdownElement){
+
+        Select select = new Select(dropdownElement);
+        List<WebElement> actualOptionsAsWebElement = select.getOptions();
+
+        List<String> givenMonths = new ArrayList<>();
+
+        for (WebElement webElement : actualOptionsAsWebElement) {
+
+            String each = webElement.getText();
+            givenMonths.add(each);
+
+        }
+
+        return givenMonths;
 
     }
 
