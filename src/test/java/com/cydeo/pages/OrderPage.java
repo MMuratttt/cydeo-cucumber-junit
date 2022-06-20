@@ -1,6 +1,7 @@
 package com.cydeo.pages;
 
 import com.cydeo.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -33,6 +34,24 @@ public class OrderPage {
 
     @FindBy (name = "zip")
     public WebElement inputZip;
+
+    public WebElement creditCardType(String string){
+
+        return Driver.getDriver().findElement(By.xpath("//input[@value='"+string+"']"));
+
+    }
+
+    @FindBy (xpath = "//input[@name='cardNo']")
+    public WebElement cardNumber;
+
+    @FindBy (xpath = "//input[@name='cardExp']")
+    public WebElement expiryDate;
+
+    @FindBy(css = "button[type='submit']")
+    public WebElement processOrderButton;
+
+    @FindBy (xpath = "//tr[@class][1]//td[1]")
+    public WebElement firstLineName;
 
 
 
